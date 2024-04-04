@@ -1,13 +1,50 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Hello World Extension</title>
-  <link rel="stylesheet" type="text/css" href="styles.css">
+    <title>Document Scanner Extension</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
-  <div id="container">
-    <h1>Hello, World!</h1>
-  </div>
-  <script src="popup.js"></script>
+    <div id="container">
+        <img src="icon.png" id="extensionIcon" alt="Husky Icon"/>
+        <h1>CyberHusky</h1>
+        <input type="file" id="fileInput" placeholder="Select a document..."/>
+
+        <!-- Buttons for scanning and selecting PII action -->
+        <button id="scanHighlight">Scan and Highlight</button>
+        <button id="scanRedact">Scan and Redact</button>
+
+        <!-- Section for PII Selection, hidden by default and will be toggled by the buttons above -->
+        <div id="highlightOptions" style="display: none;">
+            <h2>Select PII to Highlight</h2>
+            <form id="highlightForm">
+                <!-- Repeat the same checkboxes from the current PII options -->
+                <input type="checkbox" id="ssnHighlight" name="pii" value="SSN">
+                <label for="ssnHighlight">Social Security Number</label><br>
+                <input type="checkbox" id="phoneHighlight" name="pii" value="Phone">
+                <label for="phoneHighlight">Phone Numbers</label><br>
+                <input type="checkbox" id="emailHighlight" name="pii" value="Email">
+                <label for="emailHighlight">Email Addresses</label><br>
+                <!-- Add more checkboxes for each PII type -->
+                <button type="button" id="highlightButton">Highlight PII</button>
+            </form>
+        </div>
+
+        <div id="redactOptions" style="display: none;">
+            <h2>Select PII to Redact</h2>
+            <form id="redactForm">
+                <!-- Keep your existing PII category checkboxes here -->
+                <input type="checkbox" id="ssnRedact" name="pii" value="SSN">
+                <label for="ssnRedact">Social Security Number</label><br>
+                <input type="checkbox" id="phoneRedact" name="pii" value="Phone">
+                <label for="phoneRedact">Phone Numbers</label><br>
+                <input type="checkbox" id="emailRedact" name="pii" value="Email">
+                <label for="emailRedact">Email Addresses</label><br>
+                <!-- Add more checkboxes for each PII type -->
+                <button type="button" id="redactButton">Redact PII</button>
+            </form>
+        </div>
+    </div>
+    <script src="popup.js"></script>
 </body>
 </html>
