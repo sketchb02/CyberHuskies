@@ -1,49 +1,83 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Document Scanner Extension</title>
+    <title>CyberHusky</title>
     <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
     <div id="container">
-        <img src="icon.png" id="extensionIcon" alt="Husky Icon"/>
-        <h1>CyberHusky</h1>
-        <input type="file" id="fileInput" placeholder="Select a document..."/>
+        <header>
+            <img src="icon.png" id="extensionIcon" alt="Husky Icon"/>
+            <h1>CyberHusky</h1>
+        </header>
+        
+        <section id="uploadSection">
+            <div id="dropZone">
+                <p>Drag & drop files or <span id="browseFiles">Browse</span></p>
+                <p class="supported-formats">Supported formats: CSV, JSON, PDF, XLS</p>
+            </div>
+            <input type="file" id="fileInput" multiple style="display:none;"/>
+            <button id="selectFilesButton">Select Files</button>
+        </section>
 
-        <!-- Buttons for scanning and selecting PII action -->
-        <button id="scanHighlight">Scan and Highlight</button>
-        <button id="scanRedact">Scan and Redact</button>
+        <section id="piiSections" style="display:none;">
+            <div class="pii-category" id="personalSection">
+                <h2>Personal</h2>
+                <form>
+                    <input type="checkbox" id="personalName" name="pii" value="Name">
+                    <label for="personalName">Name</label><br>
+                    <input type="checkbox" id="personalAddress" name="pii" value="Address">
+                    <label for="personalAddress">Address</label><br>
+                    <input type="checkbox" id="personalEmail" name="pii" value="Email">
+                    <label for="personalEmail">Email</label><br>
+                    <input type="checkbox" id="personalZipCode" name="pii" value="ZipCode">
+                    <label for="personalZipCode">Zip Code</label><br>
+                </form>
+            </div>
+            <div class="pii-category" id="medicalSection">
+                <h2>Medical</h2>
+                <form>
+                    <input type="checkbox" id="medicalRecord" name="pii" value="MedicalRecord">
+                    <label for="medicalRecord">Medical Record</label><br>
+                    <input type="checkbox" id="medicalHistory" name="pii" value="MedicalHistory">
+                    <label for="medicalHistory">Medical History</label><br>
+                    <input type="checkbox" id="medicalInsurance" name="pii" value="Insurance">
+                    <label for="medicalInsurance">Insurance</label><br>
+                </form>
+            </div>
+            <div class="pii-category" id="financialSection">
+                <h2>Financial</h2>
+                <form>
+                    <input type="checkbox" id="financialCC" name="pii" value="CreditCard">
+                    <label for="financialCC">Credit Card</label><br>
+                    <input type="checkbox" id="financialAccount" name="pii" value="Account">
+                    <label for="financialAccount">Account Number</label><br>
+                    <input type="checkbox" id="financialRouting" name="pii" value="Routing">
+                    <label for="financialRouting">Routing Number</label><br>
+                </form>
+            </div>
+            <div class="pii-category" id="securitySection">
+                <h2>Security</h2>
+                <form>
+                    <input type="checkbox" id="securityPassword" name="pii" value="Password">
+                    <label for="securityPassword">Password</label><br>
+                    <input type="checkbox" id="securityPin" name="pii" value="Pin">
+                    <label for="securityPin">PIN</label><br>
+                </form>
+            </div>
+            <button id="scanButton">Scan Files</button>
+        </section>
 
-        <!-- Section for PII Selection, hidden by default and will be toggled by the buttons above -->
-        <div id="highlightOptions" style="display: none;">
-            <h2>Select PII to Highlight</h2>
-            <form id="highlightForm">
-                <!-- Repeat the same checkboxes from the current PII options -->
-                <input type="checkbox" id="ssnHighlight" name="pii" value="SSN">
-                <label for="ssnHighlight">Social Security Number</label><br>
-                <input type="checkbox" id="phoneHighlight" name="pii" value="Phone">
-                <label for="phoneHighlight">Phone Numbers</label><br>
-                <input type="checkbox" id="emailHighlight" name="pii" value="Email">
-                <label for="emailHighlight">Email Addresses</label><br>
-                <!-- Add more checkboxes for each PII type -->
-                <button type="button" id="highlightButton">Highlight PII</button>
-            </form>
-        </div>
-
-        <div id="redactOptions" style="display: none;">
-            <h2>Select PII to Redact</h2>
-            <form id="redactForm">
-                <!-- Keep your existing PII category checkboxes here -->
-                <input type="checkbox" id="ssnRedact" name="pii" value="SSN">
-                <label for="ssnRedact">Social Security Number</label><br>
-                <input type="checkbox" id="phoneRedact" name="pii" value="Phone">
-                <label for="phoneRedact">Phone Numbers</label><br>
-                <input type="checkbox" id="emailRedact" name="pii" value="Email">
-                <label for="emailRedact">Email Addresses</label><br>
-                <!-- Add more checkboxes for each PII type -->
-                <button type="button" id="redactButton">Redact PII</button>
-            </form>
-        </div>
+        <section id="statisticsSection" style="display:none;">
+            <h2>PII Statistics</h2>
+            <p>Names: <span id="namesCount">0</span></p>
+            <p>Emails: <span id="emailsCount">0</span></p>
+            <p>Telephone numbers: <span id="phonesCount">0</span></p>
+            <p>Addresses: <span id="addressesCount">0</span></p>
+            <p>Birthdates (ages): <span id="birthdatesCount">0</span></p>
+            <p>Medical Information: <span id="medicalInfoCount">0</span></p>
+            <button id="downloadButton">Download PDF</button>
+        </section>
     </div>
     <script src="popup.js"></script>
 </body>

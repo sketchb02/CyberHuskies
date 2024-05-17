@@ -1,16 +1,18 @@
 {
-    "manifest_version": 2,
-    "name": "Hello World Extension",
-    "version": "1.0",
-    "description": "A simple Hello World extension",
-    "browser_action": {
-      "default_icon": "icon.png",
-      "default_popup": "popup.html"
-    },
-    "permissions": [
-      "activeTab"
-    ],
-    "icons": {
-      "48": "icon.png"
-    }
+  "manifest_version": 2,
+  "name": "CyberHusky",
+  "version": "1.0",
+  "description": "A Chrome extension to scan documents for PII and highlight or redact it.",
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "popup.html",
+    "default_popup_width": 400,
+    "default_popup_height": 600
+  },
+  "permissions": [
+    "activeTab"
+  ],
+  "icons": {
+    "48": "icon.png"
   }
+}
